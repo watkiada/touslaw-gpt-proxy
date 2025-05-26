@@ -32,7 +32,7 @@ const Documents = () => {
   );
   
   // Handle folder navigation
-  const navigateToFolder = (folderId) => {
+  const navigateToFolder = (folderId: string) => {
     setCurrentFolder(folderId);
   };
   

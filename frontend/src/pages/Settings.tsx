@@ -19,7 +19,9 @@ const Settings = () => {
   const [showPineconeKey, setShowPineconeKey] = useState(false);
   
   // Handle input changes
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setSettings({
       ...settings,
@@ -28,7 +30,7 @@ const Settings = () => {
   };
   
   // Handle checkbox changes
-  const handleCheckboxChange = (e) => {
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, checked } = e.target;
     setSettings({
       ...settings,
@@ -37,7 +39,7 @@ const Settings = () => {
   };
   
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSaving(true);
     

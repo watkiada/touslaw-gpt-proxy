@@ -1,5 +1,23 @@
 import React, { useState } from 'react';
 
+interface AiSuggestions {
+  clientName?: string;
+  caseNumber?: string;
+  dateOfBirth?: string;
+  address?: string;
+  phoneNumber?: string;
+  email?: string;
+  occupation?: string;
+  employerName?: string;
+  incidentDate?: string;
+  incidentDescription?: string;
+  injuries?: string;
+  witnesses?: string;
+  insuranceProvider?: string;
+  policyNumber?: string;
+  additionalNotes?: string;
+}
+
 const PDFFormViewer = () => {
   const [formData, setFormData] = useState({
     clientName: 'John Smith',
@@ -20,7 +38,7 @@ const PDFFormViewer = () => {
   });
 
   const [isAIFilling, setIsAIFilling] = useState(false);
-  const [aiSuggestions, setAiSuggestions] = useState({});
+  const [aiSuggestions, setAiSuggestions] = useState<AiSuggestions>({});
   const [showPreview, setShowPreview] = useState(true);
 
   // Mock function to simulate AI filling the form
@@ -52,7 +70,7 @@ const PDFFormViewer = () => {
   };
 
   // Handle accepting AI suggestions
-  const acceptSuggestion = (field) => {
+  const acceptSuggestion = (field: keyof AiSuggestions) => {
     setFormData({
       ...formData,
       [field]: aiSuggestions[field]
@@ -65,7 +83,9 @@ const PDFFormViewer = () => {
   };
 
   // Handle form input changes
-  const handleInputChange = (e) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,

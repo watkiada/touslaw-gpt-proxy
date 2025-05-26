@@ -51,7 +51,7 @@ const Chat = () => {
   };
   
   // Handle pressing Enter to send message
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
