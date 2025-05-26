@@ -1,7 +1,19 @@
 import React, { useState } from 'react';
 
+interface Letterhead {
+  firmName: string;
+  address: string;
+  city: string;
+  state: string;
+  zipCode: string;
+  phone: string;
+  email: string;
+  website: string;
+  logo: File | null;
+}
+
 const LetterheadSettings = () => {
-  const [letterhead, setLetterhead] = useState({
+  const [letterhead, setLetterhead] = useState<Letterhead>({
     firmName: 'Smith & Associates Law Firm',
     address: '123 Legal Avenue, Suite 500',
     city: 'New York',
@@ -13,12 +25,12 @@ const LetterheadSettings = () => {
     logo: null
   });
   
-  const [logoPreview, setLogoPreview] = useState(null);
+  const [logoPreview, setLogoPreview] = useState<string | ArrayBuffer | null>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   
   // Handle input changes
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setLetterhead({
       ...letterhead,
@@ -27,12 +39,12 @@ const LetterheadSettings = () => {
   };
   
   // Handle logo upload
-  const handleLogoUpload = (e) => {
+  const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
-        setLogoPreview(reader.result);
+        setLogoPreview(reader.result as string);
         setLetterhead({
           ...letterhead,
           logo: file
@@ -43,7 +55,7 @@ const LetterheadSettings = () => {
   };
   
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
     
